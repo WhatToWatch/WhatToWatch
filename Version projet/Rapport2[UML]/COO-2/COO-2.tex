@@ -26,21 +26,21 @@
 
 \section{Introduction}
 
-    Durant ces dernières semaines, il nous a été demandé de modéliser les classes qui se retrouveraient dans le code de notre application WhatToWatch. Pour se faire nous avons d'abord écrit des Users Stories, ensuite nous avons écrit des cartes CRC. Avec celles-ci nous avons pu modéliser nos schémas UML relationnelles et puis séquentielles.
+    Durant ces dernières semaines, il nous a été demandé de modéliser les classes qui se retrouveraient dans le code de notre application WhatToWatch. Pour ce faire nous avons d'abord écrit des Users Stories, ensuite nous avons écrit des cartes CRC. Avec celles-ci nous avons pu modéliser nos schémas UML relationnels et puis séquentiels.
 
 \section{Création des diagrammes}
 
 \subsection{Users-Stories}
 
-    La première étape pour réaliser nos classes était de savoir exactement quelles fonctionnalités notre application devait remplir. En se basant sur nos faits élémentaires, sur nos envies et les consignes fournies, nous avons écrit ces histoires d'utilisateurs. Celles-ci sont disponibles dans un autre fichier. Pour permettre une meilleur visibilité pour la suite des opérations, il a été choisit de les divisées en plusieurs catégories:
+    La première étape pour réaliser nos classes était de savoir exactement quelles fonctionnalités notre application devait remplir. En se basant sur nos faits élémentaires, sur nos envies et les consignes fournies, nous avons écrit ces histoires d'utilisateurs. Celles-ci sont disponibles dans un autre fichier. Pour permettre une meilleure visibilité pour la suite des opérations, il a été choisi de les diviser en plusieurs catégories:
 
     \begin{itemize}
 
-        \item L'interaction avec l'utilisateur
+        \item Les interactions avec l'utilisateur
 
         \item Les recherches faites par l'utilisateur
 
-        \item L'interaction entre l'utilisateur et les films
+        \item Les interactions entre l'utilisateur et les films
 
         \item La gestion des utilisateurs
 
@@ -58,11 +58,11 @@
 
     
 
-    Premièrement, nous avons décidé de définir la classe $Administrateur$ comme héritant de $Utilisateur$ car un administrateur c'est qu'un utilisateur avec des droits entendus.
+    Premièrement, nous avons décidé de définir la classe $Administrateur$ comme héritant de $Utilisateur$ car un administrateur est un utilisateur avec des droits entendus.
 
     
 
-    Deuxièmement, il a été choisi de mettre les classes $Suggestion$ et $Eval$ comme des compositions car une fois qu'un utilisateur est supprimé, nous voulons de toutes ses traces disparaissent. Pour les mêmes raisons, les classes $Illustration$ , $Prix$, $Commentaire$ et $MotCle$ sont des compositions de la classe $Film$.
+    Deuxièmement, il a été choisi de mettre les classes $Suggestion$ et $Eval$ comme des compositions car une fois qu'un utilisateur est supprimé, nous voulons que toutes ses traces disparaissent. Pour les mêmes raisons, les classes $Illustration$ , $Prix$, $Commentaire$ et $MotCle$ sont des compositions de la classe $Film$.
 
     
 
@@ -72,21 +72,21 @@
 
         
 
-\subsection{Schema sequentielle UML}
+\subsection{Schema sequentiel UML}
 
     \subsubsection{Ajout d'une note à un film}
 
-    Comme dit plus haut, quand un utilisateur ajoute une note à un film il faut qu'à la fin de cette opération l'utilisateur se souvienne de la note qu'il a donné et que le film ait actualisé la valeur de sa note globale. Pour y arriver nous avons choisit la séquence qui se trouve dans le fichier ci joint.
+    Comme dit plus haut, quand un utilisateur ajoute une note à un film, il faut qu'à la fin de cette opération l'utilisateur se souvienne de la note qu'il a donné et que le film ait actualisé la valeur de sa note globale. Pour y arriver nous avons choisi la séquence qui se trouve dans le fichier ci joint.
 
     
 
-    Une fois que l'utilisateur veut rajouter une évaluation, il appelle la fonction $AddEvalToFilm()$ sur le film choisit. Ce film se charge de récupérer la note qui doit être attribué grâce à la fonction $getInt()$. Il crée alors une nouvelle $Eval$ qui contient la cote et son nom. Il actualise sa note globale et la renvoie à l'utilisateur en question. La classe $Utilisateur$ insert alors cette $Eval$ dans sa liste. Ainsi les objectifs sont remplis.
+    Une fois que l'utilisateur veut rajouter une évaluation, il appelle la fonction $AddEvalToFilm()$ sur le film choisi. Ce film se charge de récupérer la note qui doit être attribuée grâce à la fonction $getInt()$. Il crée alors une nouvelle $Eval$ qui contient la cote et son nom. Il actualise sa note globale et la renvoie à l'utilisateur en question. La classe $Utilisateur$ insère alors cette $Eval$ dans sa liste. Ainsi les objectifs sont remplis.
 
     
 
     \subsection{Rechercher un film dans les cinémas}
 
-    Quand un utilisateur veut aller voir un film dans un cinéma, il faut que le cinéma le plus proche de lui soit proposé. Pour se faire voici l'explication de la séquence ci-jointe.
+    Quand un utilisateur veut aller voir un film dans un cinéma, il faut que le cinéma le plus proche de lui soit proposé. Pour ce faire voici l'explication de la séquence ci-jointe.
 
     
 
@@ -98,11 +98,11 @@
 
     
 
-    Il est souhaité de pouvoir suggérer à une autre $Utilisateur$ un film qu'il pourrait regarder. Affin d'implémenter cette fonctionnalité, nous avons choisit de procéder de la manière suivante.
+    Il est souhaité de pouvoir suggérer à une autre $Utilisateur$ un film qu'il pourrait regarder. Affin d'implémenter cette fonctionnalité, nous avons choisi de procéder de la manière suivante.
 
     
 
-    Quand un utilisateur choisit de suggérer un film, il appelle la fonction $creeSuggestion()$ sur le film choisit qui s'occupe de créer la $Suggestion$. Celle-ci est initialisé avec le nom du film et de l'utilisateur A. Une fois que la $Suggestion$ est crée, l'utilisateur A la récupère. Il appelle alors la fonction $SuggereToUtilisateur()$ sur l'utilisateur B. Celui place alors la nouvelle suggestion dans sa liste de suggestion grâce à la méthode $addSuggestion()$.
+    Quand un utilisateur choisit de suggérer un film, il appelle la fonction $creeSuggestion()$ sur le film choisi qui s'occupe de créer la $Suggestion$. Celle-ci est initialisée avec le nom du film et de l'utilisateur A. Une fois que la $Suggestion$ est créée, l'utilisateur A la récupère. Il appelle alors la fonction $SuggereToUtilisateur()$ sur l'utilisateur B. Celui-ci place alors la nouvelle suggestion dans sa liste de suggestion grâce à la méthode $addSuggestion()$.
 
     
 
